@@ -1,0 +1,17 @@
+package domain;
+
+import java.sql.*;
+
+public class BookDAO {
+	//도서등록
+	public void insert(BookVO vo) {
+		try {
+			String sql ="insert into TBL_books(isbn,title,authors,publisher,thumbnail,price,pdate,url,isbn,rdate,contents) values(?,?,?,?,?,?,?,?,?,?,?)";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			
+		} catch (Exception e) {
+			System.out.println("도서등록 오류 : " + e.toString());
+		}
+	}
+
+}

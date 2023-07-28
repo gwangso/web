@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<div class="row my-5">
+	<div class="col">
+		<h1>상품정보</h1>
+		<div class="card p-3">
+			<h5>상품코드: ${vo.pcode}</h5>
+			<h5>상품명: ${vo.pname}</h5>
+			<h5>상품가격: ${vo.pprice}</h5>
+			<h5>상품등록일: ${vo.pdate}</h5>
+		</div>
+		<div class="text-center">
+			<button class="btn btn-primary">수정</button>
+			<button class="btn btn-danger" id="product_delete">삭제</button>
+		</div>
+	</div>
+</div>
+
+<script>
+
+	$("#product_delete").on("click", function(){
+		const code= "${vo.pcode}";
+		if(confirm(code + "번 상품을 삭제하실레요?")){
+			alert("삭제예비완료")
+		}
+	})
+</script>

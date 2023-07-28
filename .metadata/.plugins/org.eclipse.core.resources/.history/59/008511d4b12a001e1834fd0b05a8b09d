@@ -1,0 +1,53 @@
+package controller;
+
+import java.io.IOException; 
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.*;
+
+@WebServlet(value = {"/pro/list","/pro/insert","/pro/read"})
+public class ProductController extends HttpServlet {
+	ProductDAO pdao = new ProductDAO();
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		switch (request.getServletPath()) {
+		case "/pro/list":
+			request.setAttribute("array", pdao.list());
+			request.setAttribute("pageName", "/pro/list.jsp");
+			break;
+		case "/pro/insert":
+			request.setAttribute("pageName", "/pro/insert.jsp");
+			break;
+		case "/pro/read":
+			String pcode = request.getParameter("pcode1");
+			request.setAttribute("vo", pdao.read(pcode));
+			request.setAttribute("pageName", "/pro/read.jsp");
+			break;			
+		}
+		RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
+		dis.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		switch(request.getServletPath()) {
+		case "/pro/insert":
+			String pname= request.getParameter("pname"); // submit하면 값이 request에 저장
+			String pprice= request.getParameter("pprice");
+			//getParameter로는 정수를 못받는다. 무조건 문자열
+			ProductVO vo = new ProductVO();
+			vo.setPname(pname);
+			vo.setPprice(Integer.parseInt(pprice));
+			pdao.insert(vo);
+			response.sendRedirect("/pro/list");
+			break;
+		}
+	}
+}

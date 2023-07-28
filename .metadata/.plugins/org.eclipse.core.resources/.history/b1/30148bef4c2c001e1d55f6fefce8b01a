@@ -1,0 +1,58 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.*;
+
+@WebServlet(value={"/book/search","/book/insert", "/book/list", "/book/list.json"})
+public class BookController extends HttpServlet {
+	BookDAO dao = new BookDAO();
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
+		PrintWriter out = response.getWriter(); //브라우저에 출력
+		switch(request.getServletPath()) {
+		case "/book/search":
+			request.setAttribute("pageName", "/book/search.jsp");
+			dis.forward(request, response);
+			break;
+		case "/book/list":
+			request.setAttribute("pageName", "/book/list.jsp");
+			dis.forward(request, response);
+			break;
+		case "/book/list.json":
+			out.println(dao.list(1));
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		switch (request.getServletPath()) {
+		case "/book/insert":
+			BookVO vo = new BookVO();
+			vo.setIsbn(request.getParameter("isbn"));
+			vo.setTitle(request.getParameter("title"));
+			vo.setAuthors(request.getParameter("authors"));
+			vo.setPublisher(request.getParameter("publisher"));
+			vo.setThumbnail(request.getParameter("thumbnail"));
+			vo.setPrice(Integer.parseInt(request.getParameter("price")));
+			vo.setPdate(request.getParameter("datetime"));
+			vo.setUrl(request.getParameter("url"));
+			vo.setContents(request.getParameter("contents"));
+//			System.out.println(vo.toString());
+			dao.insert(vo);
+			break;
+		}
+		
+	}
+
+}

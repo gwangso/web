@@ -1,0 +1,18 @@
+package model;
+
+import java.sql.*;
+import java.util.*;
+
+
+public class ProductDAO {
+	
+	public List<ProductVO> list(){
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		String sql = "SELECT * FROM TBL_PRODUCTS ORDER BY PCODE DESC";
+		PreparedStatement pre = ex01.Database.CON.prepareStatement(sql);
+		ResultSet rs = pre.executeQuery();
+		
+		return list;
+	}
+
+}

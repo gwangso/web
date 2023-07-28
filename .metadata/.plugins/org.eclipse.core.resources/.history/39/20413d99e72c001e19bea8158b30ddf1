@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<div class="row my-3">
+	<div class="col">
+		<h1 class="mb-5">상품목록</h1>
+		<div id="div_list"></div>
+	</div>
+</div>
+
+<<script id="temp_list" type="text/x-handelbars-template">
+	<table>
+		<tr>
+			<td>상품코드</td>
+			<td>상품이름</td>
+			<td>상품가격</td>
+		</tr>
+		{{#each .}}
+		<tr>
+			<td>{{pcode}}</td>
+			<td>{{pname}}</td>
+			<td>{{fmtPrice pprice}}</td>
+		</tr>
+		{{/each}}
+	</table>
+</script>
+
+<!-- 핸들바함수 -->
+<script>
+	Handlebars.registerHelper("fmtPrice", function(){
+		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
+	})
+
+</script>

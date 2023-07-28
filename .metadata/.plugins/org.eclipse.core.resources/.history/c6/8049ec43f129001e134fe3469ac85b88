@@ -1,0 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+   
+<div class="row">
+	<div class="col">
+		<h1 class="text-center">상품목록</h1>
+		<table class="table table-primary">
+			<c:forEach items="${array}" var="vo">
+			<!-- array에 있는 값을 하나씪 받아서 vo에 넣음 -->
+				<tr>
+					<td>${vo.pcode}</td>
+					<td>${vo.pname}</td>
+				</tr>	
+			</c:forEach>
+		</table>		
+	</div>
+</div>

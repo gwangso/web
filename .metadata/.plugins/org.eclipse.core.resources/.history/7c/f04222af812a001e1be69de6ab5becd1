@@ -1,0 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<div class="row">
+	<div class="col">
+		<a href="/">Home</a>
+		<a href="/pro/list">Product</a>
+		<a href="/pro/insert">Product</a>
+	</div>
+</div>

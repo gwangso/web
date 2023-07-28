@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>홈페이지</title>
+		<style>
+			a {
+				margin:10px;
+			}
+		</style>
+	</head>
+<body>
+	<div>
+		<a href="/">회사소개</a>
+		<a href="/pro/list">상품목록</a>
+		<a href="/stu/list">학생목록</a>
+		<a href="/pro/insert">상품등록</a>
+		<a href="/stu/insert">학생등록</a>		
+	</div>
+	<hr>	
+	
+	
+</body>
+
+
+</html>

@@ -1,0 +1,13 @@
+package model;
+
+import java.util.*;
+
+public class ProductDAO {
+	
+	public List<ProductVO> list(){
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		
+		return list;
+	}
+
+}

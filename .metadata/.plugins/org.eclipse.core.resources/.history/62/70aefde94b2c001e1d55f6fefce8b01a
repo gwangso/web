@@ -1,0 +1,46 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.*;
+
+@WebServlet(value={"/book/search","/book/insert"})
+public class BookController extends HttpServlet {
+	BookDAO dao = new BookDAO();
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("pageName", "/book/search.jsp");
+		RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
+		dis.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		switch (request.getServletPath()) {
+		case "/book/insert":
+			BookVO vo = new BookVO();
+			vo.setIsbn(request.getParameter("isbn"));
+			vo.setTitle(request.getParameter("title"));
+			vo.setAuthors(request.getParameter("authors"));
+			vo.setPublisher(request.getParameter("publisher"));
+			vo.setThumbnail(request.getParameter("thumbnail"));
+			vo.setPrice(Integer.parseInt(request.getParameter("price")));
+			vo.setPdate(request.getParameter("datetime"));
+			vo.setUrl(request.getParameter("url"));
+			vo.setContents(request.getParameter("contents"));
+//			System.out.println(vo.toString());
+			dao.insert(vo);
+			break;
+		}
+		
+	}
+
+}

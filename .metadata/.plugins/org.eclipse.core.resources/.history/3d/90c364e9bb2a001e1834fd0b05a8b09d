@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<div class="row">
+	<div class="col">
+		<h1>상품목록</h1>
+		<table class="table table-warning">
+			<c:forEach items="${array}" var="vo">
+				<tr >
+					<td>${vo.pcode}</td>
+					<td><a href="/pro/read?pcode=${vo.pcode}">${vo.pname}</a></td>
+					<td><fmt:formatNumber value="${vo.pprice}" pattern="#,###"/></td>
+					<td><fmt:formatDate value="${vo.pdate}" pattern="yyyy-MM-dd"/></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<div class="text-center">
+			<button id="prev" class="btn btn-primary">이전</button>
+			<span id="nowpage">1</span>
+			<button id="next" class="btn btn-primary">다음</button>
+		</div>
+	</div>
+</div>

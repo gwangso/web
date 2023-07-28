@@ -1,0 +1,38 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.*;
+
+@WebServlet(value ={"/local/list","/local/insert"})
+public class LocalController extends HttpServlet {
+	LocalDAO dao= new LocalDAO();
+	private static final long serialVersionUID = 1L;
+       
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
+   		request.setAttribute("pageName", "/local/list.jsp");
+    	dis.forward(request, response);
+	}
+    
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	switch(req.getServletPath()) {
+    	case "/local/insert":
+    		LocalVO vo = new LocalVO();
+    		vo.setLid(req.getParameter("lid"));
+    		vo.setLname(req.getParameter("lname"));
+    		vo.setLaddress(req.getParameter("address_name"));
+    		System.out.println(vo.toString());
+    		break;
+    	}
+    }
+
+}

@@ -1,0 +1,39 @@
+package controller;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet(value={"/pro/list", "/pro/insert"})
+public class ProductController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public ProductController() {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher dis = null;
+		switch (request.getServletPath()) { //주소 정보 = request.
+		case "/pro/list":
+			request.setAttribute("pageName", "/pro/list.jsp");
+			break;
+		case "/pro/insert":
+			dis = request.getRequestDispatcher("insert.jsp");
+			break;
+		}
+		dis.forward(request, response);
+	}
+
+	//form에서 메소드를 Post라 주었을 때만 작동
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
+}
