@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 
 import model.*;
 
-@WebServlet(value = {"/pro/list", "/pro/list.json"})
+@WebServlet(value = {"/pro/list", "/pro/list.json", "/pro/insert", "/pro/delete", "/pro/update"})
 public class ProductController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductDAO pdao = new ProductDAO();
@@ -36,7 +36,10 @@ public class ProductController extends HttpServlet {
 			int page = request.getParameter("page")==null ? 1:
 				Integer.parseInt(request.getParameter("page"));
 			
-			ArrayList<ProductVO> array = pdao.list(page);
+			String query = request.getParameter("query")==null ? "":
+				request.getParameter("query");
+			
+			ArrayList<ProductVO> array = pdao.list(page, query);
 			
 			//ArrayList를 JSONArray로 변환
 			JSONArray jArray = new JSONArray();
@@ -49,9 +52,8 @@ public class ProductController extends HttpServlet {
 				obj.put("fpdate", sdf.format(vo.getPdate()));
 				jArray.add(obj);
 			}
-			
 			JSONObject jObject = new JSONObject();
-			jObject.put("total", pdao.total());
+			jObject.put("total", pdao.total(query));
 			jObject.put("items", jArray);
 			out.println(jObject);
 			break;
@@ -59,11 +61,24 @@ public class ProductController extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		switch (request.getServletPath()) {
 		case "/pro/insert":
+			ProductVO vo = new ProductVO();
+			vo.setPname(request.getParameter("pname"));
+			vo.setPprice(Integer.parseInt(request.getParameter("pprice")));
+			pdao.insert(vo);
+			break;
+		case "/pro/delete":
+			int code = Integer.parseInt(request.getParameter("pcode"));
+			pdao.delete(code);
+			break;
+		case "/pro/update":
+			ProductVO uvo = new ProductVO();
+			uvo.setPname(request.getParameter("pname"));
+			uvo.setPprice(Integer.parseInt(request.getParameter("pprice")));
+			uvo.setPcode(Integer.parseInt(request.getParameter("pcode")));
+			pdao.update(uvo);
 			break;
 		}
 	}
-
 }
