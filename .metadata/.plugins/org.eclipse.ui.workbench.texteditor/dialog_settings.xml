@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="btn-warning"/>
+		<item key="selection" value="pagi"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="pagination"/>
+			<item value="pagi"/>
+			<item value="page"/>
+			<item value="temp"/>
+			<item value="div"/>
+			<item value="div_stu_list"/>
+			<item value="temp_stu_list"/>
+			<item value="html_stu_list"/>
+			<item value="com_temp_stu_list"/>
+			<item value="data"/>
+			<item value="query"/>
+			<item value="frm_pro"/>
+			<item value="getStuList"/>
+			<item value="&#x09;&lt;&lt;table&gt;"/>
 			<item value="btn-warning"/>
-			<item value="align"/>
-			<item value="frm_list"/>
-			<item value="frm"/>
-			<item value="code"/>
-			<item value="frm_insert"/>
-			<item value="frm."/>
-			<item value="8080"/>
-			<item value="div_list"/>
-			<item value="temp_list"/>
-			<item value="target"/>
-			<item value="authors"/>
-			<item value="now_page"/>
-			<item value="pro/update"/>
-			<item value="servlet-mapping"/>
 		</list>
 		<list key="replacehistory">
 			<item value="frm_list"/>
@@ -32,7 +32,7 @@
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="-82"/>
+		<item key="DIALOG_X_ORIGIN" value="8"/>
 		<item key="DIALOG_Y_ORIGIN" value="356"/>
 		<item key="DIALOG_WIDTH" value="322"/>
 		<item key="DIALOG_HEIGHT" value="391"/>
