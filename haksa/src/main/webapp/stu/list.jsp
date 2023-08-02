@@ -20,7 +20,7 @@
 			</form>
 		</div>
 		<div id="div_stu_list"></div>
-		<div id="pagination" class="pagination justify-content-center"></div>
+		<div id="pagination" class="pagination justify-content-center my-3"></div>
 	</div>
 </div>
 

@@ -17,11 +17,11 @@ import org.json.simple.JSONObject;
 
 import model.*;
 
-@WebServlet(value={"/pro/list", "/pro/list.json", "/pro/total"})
+@WebServlet(value={"/pro/list", "/pro/list.json", "/pro/total", "/pro/insert", "/pro/update"})
 public class ProfessorsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProfessorsDAO dao = new ProfessorsDAO();
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd");
 	DecimalFormat df = new DecimalFormat("#,###원");
 			
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,23 +49,57 @@ public class ProfessorsController extends HttpServlet {
 				obj.put("pcode", vo.getPcode());
 				obj.put("pname", vo.getPname());
 				obj.put("dept", vo.getDept());
-				obj.put("hiredate", sdf.format(vo.getHiredate()));
+				obj.put("hiredate", vo.getHiredate());
 				obj.put("title", vo.getTitle());
 				obj.put("salary", df.format(vo.getSalary()));
 				jArray.add(obj);
 			}
 			out.println(jArray);
 			break;
-		case "/pro/total":
+		case "/pro/total": // /pro/total?query=이&key=pname
 			query = request.getParameter("query")==null ?
 					"": request.getParameter("query");
 			key = request.getParameter("key");
 			out.print(dao.getTotal(query,key));
 			break;
+		case "/pro/update":
+			String pcode = request.getParameter("pcode");
+			request.setAttribute("up", dao.read(pcode));
+			request.setAttribute("pageName", "/pro/update.jsp");
+			dis.forward(request, response);
+			break;
 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
+		request.setCharacterEncoding("UTF-8");
+		switch (request.getServletPath()) {
+		case "/pro/insert":
+			ProfessorsVO vo = new ProfessorsVO();
+			
+			vo.setPname(request.getParameter("pname"));
+			vo.setDept(request.getParameter("dept"));
+			vo.setTitle(request.getParameter("title"));
+			vo.setSalary(Integer.parseInt(request.getParameter("salary")));
+			vo.setHiredate(request.getParameter("hiredate"));
+			
+			System.out.println(vo.toString());
+			dao.insert(vo);
+			break;
+		case "/pro/update":
+			ProfessorsVO uvo = new ProfessorsVO();
+			
+			uvo.setPcode(request.getParameter("pcode"));
+			uvo.setPname(request.getParameter("pname"));
+			uvo.setDept(request.getParameter("dept"));
+			uvo.setTitle(request.getParameter("title"));
+			uvo.setSalary(Integer.parseInt(request.getParameter("salary")));
+			uvo.setHiredate(request.getParameter("hiredate"));
+			dao.update(uvo);
+			response.sendRedirect("/pro/list");
+			break;
+			
 
+		}
+	}
 }

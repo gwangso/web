@@ -1,15 +1,14 @@
 package model;
 
-import java.util.Date;
 
 public class ProfessorsVO {
 	private String pcode;
 	private String pname;
 	private String dept;
-	private Date hiredate;
+	private String hiredate;
 	private String title;
 	private int salary;
-	
+
 	public String getPcode() {
 		return pcode;
 	}
@@ -28,10 +27,10 @@ public class ProfessorsVO {
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
-	public Date getHiredate() {
+	public String getHiredate() {
 		return hiredate;
 	}
-	public void setHiredate(Date hiredate) {
+	public void setHiredate(String hiredate) {
 		this.hiredate = hiredate;
 	}
 	public String getTitle() {
@@ -46,7 +45,8 @@ public class ProfessorsVO {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
-	
+
+
 	@Override
 	public String toString() {
 		return "ProfessorsVO [pcode=" + pcode + ", pname=" + pname + ", dept=" + dept + ", hiredate=" + hiredate

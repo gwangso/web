@@ -12,13 +12,13 @@
 			data:{query:query, key:key},
 			success:function(data){
 				if(data==0){
-					$(`#pagination`).hide();
+					$("#pagination").hide();
 					$("#div_"+url+"_list").html(`<h3 class="text-center my-5"><b>검색결과없음</b><h3>`);
 					$(frm.query).val("");
 				}else {
 					$("#pagination").show();
 					const totalPages = Math.ceil(data/5);
-					$(`#pagination`).twbsPagination("changeTotalPages", totalPages, 1)
+					$("#pagination").twbsPagination("changeTotalPages", totalPages, 1)
 				}
 			}
 		})

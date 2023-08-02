@@ -20,6 +20,24 @@
 		</div>
 		<div id="div_pro_list"></div>
 		<div id="pro_pagination" class="pagination justify-content-center"></div>
+		<div class="text-end">
+			<button id="btn_insert" class="btn btn-primary">교수등록</button>
+		</div>
+	</div>
+</div>
+
+<!-- 교수등록Modal -->
+<div class="modal fade modal-lg" id="insert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+			<jsp:include page="/pro/insert.jsp"/>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -36,7 +54,7 @@
 		{{#each .}}
 		<tr>
 			<td>{{pcode}}</td>
-			<td>{{pname}}</td>
+			<td><a href="/pro/update?pcode={{pcode}}">{{pname}}</a></td>
 			<td>{{dept}}</td>
 			<td>{{hiredate}}</td>
 			<td>{{title}}</td>
@@ -66,6 +84,10 @@
 		});
 	}
 	
+	$("#btn_insert").on("click", function(){
+		$("#insert").modal("show");
+	})
+	
 	$('#pro_pagination').twbsPagination({
 		totalPages:5,	// 총 페이지 번호 수
 		visiblePages: 5,	// 하단에서 한번에 보여지는 페이지 번호 수
@@ -86,7 +108,6 @@
 			url:"/pro/total",
 			data:{query:query, key:key},
 			success:function(data){
-				console.log(data);
 				if(data==0){
 					$("#pro_pagination").hide();
 					$("#div_pro_list").html(`<h3 class="text-center my-5"><b>검색결과없음</b><h3>`);
