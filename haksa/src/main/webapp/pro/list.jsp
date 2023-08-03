@@ -17,12 +17,12 @@
 					<button class="btn btn-primary">검색</button>
 				</div>
 			</form>
+			<div class="col text-end">
+				<button id="btn_pro_insert" class="btn btn-primary">교수등록</button>
+			</div>
 		</div>
 		<div id="div_pro_list"></div>
 		<div id="pro_pagination" class="pagination justify-content-center"></div>
-		<div class="text-end">
-			<button id="btn_insert" class="btn btn-primary">교수등록</button>
-		</div>
 	</div>
 </div>
 
@@ -84,7 +84,7 @@
 		});
 	}
 	
-	$("#btn_insert").on("click", function(){
+	$("#btn_pro_insert").on("click", function(){
 		$("#insert").modal("show");
 	})
 	

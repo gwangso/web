@@ -53,7 +53,7 @@
 		const pname=$(frm_pro_insert.pname).val();
 		const dept = $(frm_pro_insert.dept).val();
 		const salary=$(frm_pro_insert.salary).val();		
-		const title = $(frm_pro_insert.title).val();
+		const title = $('input:radio[name="title"]:checked').val();
 		const hiredate = $(frm_pro_insert.hiredate).val();
 		if(pname==""){
 			alert("교수이름을 입력하세요.")
@@ -82,9 +82,10 @@
 			}else{
 				alert("등록을 취소했습니다.")
 				$(frm_pro_insert.pname).val("");
-				$(frm_pro_insert.dept).val("생명공학");
+				$(frm_pro_insert.dept).val("생명");
 				$(frm_pro_insert.salary).val("0");
-				$(frm_pro_insert.title).val("부교수");
+				$('input:radio[name="title"][value="부교수"]').prop("checked", true);
+				$(frm_pro_insert.hiredate).val("");
 			}			
 		} 
 	});

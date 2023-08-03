@@ -34,6 +34,20 @@ public class DAOtest {
 //		System.out.println(vo.toString());
 //		pdao.insert(vo);
 		
-		System.out.println(pdao.read("159").toString());
+//		System.out.println(pdao.read("159").toString());
+//		
+//		StudentsVO svo = new StudentsVO();
+//		svo.setSname("남승훈");
+//		svo.setDept("전자");
+//		svo.setBirthday("1995-07-11");
+//		svo.setYear(3);
+//		svo.setAdvisor("311");
+//		sdao.insert(svo);
+
+//		System.out.println(cdao.getCode());
+		System.out.println(cdao.read("A109").toString());
+	
+	
 	}
+	
 }

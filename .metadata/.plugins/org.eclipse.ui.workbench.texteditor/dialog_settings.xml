@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="frm_pro_insert"/>
+		<item key="selection" value="persons"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="persons"/>
+			<item value="parray"/>
+			<item value="update"/>
+			<item value="insert"/>
+			<item value="div_cou_list"/>
+			<item value="&apos;"/>
+			<item value="Default"/>
+			<item value="prevent"/>
+			<item value="submit"/>
+			<item value="birthday"/>
+			<item value="year"/>
+			<item value="sname"/>
+			<item value="advisor"/>
+			<item value="dept"/>
 			<item value="frm_insert"/>
-			<item value="location"/>
-			<item value="out"/>
-			<item value="Date"/>
-			<item value="frm"/>
-			<item value="#pagination"/>
-			<item value="person"/>
-			<item value="pagination"/>
-			<item value="pagi"/>
-			<item value="page"/>
-			<item value="temp"/>
-			<item value="div"/>
-			<item value="div_stu_list"/>
-			<item value="temp_stu_list"/>
-			<item value="html_stu_list"/>
 		</list>
 		<list key="replacehistory">
+			<item value="form"/>
+			<item value="radio"/>
 			<item value="frm_pro_insert"/>
 			<item value="String"/>
 			<item value="#&quot;+url+&quot;_pagination"/>

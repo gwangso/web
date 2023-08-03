@@ -1,10 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
+<style>
+	.cou{
+		cursor:pointer;
+	}
+	.cou:hover{
+		color:blue;
+	}
+</style>
+    
 <div class="row my-5">
 	<div class="col">
-		<h1 class="text-center my-3">강좌목록</h1>
-		<div class="row">
+		<h1 class="text-center">강좌목록</h1>
+		<div class="row my-4">
 			<form name="frm" class="col-10 col-md-6 col-xl-4">
 				<div class="input-group">
 					<select class="form-select" name="key">
@@ -18,11 +27,29 @@
 					<button class="btn btn-primary">검색</button>
 				</div>
 			</form>
+			<div class="col text-end">
+				<button id="btn_insert" class="btn btn-primary">강좌등록</button>
+			</div>
 		</div>
 		<div id="div_cou_list"></div>
 		<div id="pagination" class="pagination justify-content-center my-3"></div>
 	</div>
 </div>
+
+<div class="modal fade" id="modal_insert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+	    	<div class="modal-header">
+	        	<h1 class="modal-title fs-5" id="staticBackdropLabel">강좌 등록</h1>
+	        	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      	</div>
+	    	<div class="modal-body">
+	    	<jsp:include page="insert.jsp"/>
+	    	</div>
+	    </div>
+	</div>
+</div>
+
 
 <script id="temp_cou_list" type="text/x-handlebars-template">
 	<table class="table">
@@ -37,8 +64,8 @@
 			<th>수강신청인원수</th>
 		</tr>
 		{{#each .}}
-		<tr>
-			<td>{{lcode}}</td>
+		<tr class="cou">
+			<td class="lcode">{{lcode}}</td>
 			<td>{{lname}}</td>
 			<td>{{instructor}}</td>
 			<td>{{pname}}</td>
@@ -55,6 +82,15 @@
 <script>
 	let url = "cou";
 	getTotal();
+	
+	$("#btn_insert").on("click", function(){
+		$("#modal_insert").modal("show");
+	});
+	
+	$("#div_cou_list").on("click", ".cou", function(){
+		const lcode = $(this).find(".lcode").text();
+		location.href="/cou/update?lcode="+lcode;
+	});
 	
 	/*
 	let query = $(frm.query).val();

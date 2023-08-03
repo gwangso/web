@@ -7,7 +7,7 @@ public class StudentsVO extends ProfessorsVO {
 	private String sname;
 	private String dept;
 	private int year;
-	private Date birthday;
+	private String birthday;
 	private String advisor;
 	
 	public String getScode() {
@@ -15,6 +15,12 @@ public class StudentsVO extends ProfessorsVO {
 	}
 	public void setScode(String scode) {
 		this.scode = scode;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 	public String getSname() {
 		return sname;
@@ -34,12 +40,7 @@ public class StudentsVO extends ProfessorsVO {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public Date getBirthday() {
-		return birthday;
-	}
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+
 	
 	public String getAdvisor() {
 		return advisor;

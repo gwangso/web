@@ -18,14 +18,32 @@
 					<button class="btn btn-primary">검색</button>
 				</div>
 			</form>
+			<div class="col text-end">
+				<button id="btn_insert" class="btn btn-primary">학생등록</button>
+			</div>
 		</div>
 		<div id="div_stu_list"></div>
 		<div id="pagination" class="pagination justify-content-center my-3"></div>
 	</div>
 </div>
 
+<div class="modal fade" id="modal_insert" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  	<div class="modal-dialog  modal-lg">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<h1 class="modal-title fs-5" id="staticBackdropLabel">학생등록</h1>
+        		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      		</div>
+		    <div class="modal-body">
+		    <jsp:include page="insert.jsp"/>
+		    </div>
+    	</div>
+  	</div>
+</div>
+
+
 <script id="temp_stu_list" type="text/x-handlebars-template">
-	<table class="table">
+	<table class="table table-hover">
 		<tr class="table-warning">
 			<th>학생번호</th>
 			<th>학생이름</th>
@@ -35,7 +53,7 @@
 			<th>지도교수</th>
 		</tr>
 		{{#each .}}
-		<tr>
+		<tr class="stu " style="cursor: pointer;" scode={{scode}}>
 			<td>{{scode}}</td>
 			<td>{{sname}}</td>
 			<td>{{dept}}</td>
@@ -53,6 +71,15 @@
 	let url="stu";
 	getTotal();
 
+	$("#btn_insert").on("click",function(){
+		$("#modal_insert").modal("show");
+	})
+	
+	$("#div_stu_list").on("click", ".stu", function(){
+		const scode=$(this).attr("scode");
+		location.href="/stu/update?scode="+scode;
+	})
+	
 	/*
 	let query="";
 	let key=$(frm_stu.key).val();

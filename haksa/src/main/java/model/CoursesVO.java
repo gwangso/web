@@ -45,7 +45,7 @@ public class CoursesVO extends ProfessorsVO {
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}
-	public int getpPersons() {
+	public int getPersons() {
 		return persons;
 	}
 	public void setPersons(int persons) {
