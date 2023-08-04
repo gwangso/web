@@ -51,15 +51,21 @@
 			<th>학년</th>
 			<th>생년월일</th>
 			<th>지도교수</th>
+			<th>수강신청</th>
 		</tr>
 		{{#each .}}
-		<tr class="stu " style="cursor: pointer;" scode={{scode}}>
+		<tr class="stu" scode={{scode}}>
 			<td>{{scode}}</td>
-			<td>{{sname}}</td>
+			<td><a href="/stu/update?scode={{scode}}">{{sname}}</a></td>
 			<td>{{dept}}</td>
 			<td>{{year}}</td>
 			<td>{{birthday}}</td>
 			<td>{{pname}}({{advisor}})</td>
+			<td>
+				<a href="/stu/enroll?scode={{scode}}">
+					<button class="btn btn-primary btn-sm">수강신청</button>
+				</a>
+			</td>
 		</tr>
 		{{/each}}
 	</table>
@@ -73,11 +79,6 @@
 
 	$("#btn_insert").on("click",function(){
 		$("#modal_insert").modal("show");
-	})
-	
-	$("#div_stu_list").on("click", ".stu", function(){
-		const scode=$(this).attr("scode");
-		location.href="/stu/update?scode="+scode;
 	})
 	
 	/*

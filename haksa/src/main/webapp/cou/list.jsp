@@ -62,6 +62,7 @@
 			<th>강의실</th>
 			<th>최대수강인원</th>
 			<th>수강신청인원수</th>
+			<th>점수등록</th>
 		</tr>
 		{{#each .}}
 		<tr class="cou">
@@ -73,10 +74,13 @@
 			<td>{{room}}</td>
 			<td>{{capacity}}</td>
 			<td>{{persons}}</td>
+			<td><button class="btn btn-primary btn-sm">점수등록</button></td>
 		</tr>
 		{{/each}}
 	</table>
 </script>
+
+
 
 <script src="/js/script.js"></script>
 <script>
@@ -87,11 +91,16 @@
 		$("#modal_insert").modal("show");
 	});
 	
-	$("#div_cou_list").on("click", ".cou", function(){
+	$("#div_cou_list").on("click", ".cou td:not(:last-child)", function(){
 		const lcode = $(this).find(".lcode").text();
 		location.href="/cou/update?lcode="+lcode;
 	});
 	
+	$("#div_cou_list").on("click", ".btn-primary", function(){
+		const row= $(this).parent().parent();
+		const lcode = $(row).find(".lcode").text();
+		location.href="/cou/grade?lcode="+lcode;
+	})
 	/*
 	let query = $(frm.query).val();
 	let key = $(frm.key).val();

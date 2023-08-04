@@ -18,7 +18,7 @@ import com.google.gson.Gson;
 import java.util.*;
 import model.*;
 
-@WebServlet(value={"/cou/list", "/cou/list.json", "/cou/total", "/cou/insert", "/cou/update"})
+@WebServlet(value={"/cou/list", "/cou/list.json", "/cou/total", "/cou/insert", "/cou/update", "/cou/all.json", "/cou/grade", "/cou/grade.json", "/grade/update"})
 public class CoursesController extends HttpServlet {
 	CoursesDAO dao = new CoursesDAO();
 	ProfessorsDAO pdao = new ProfessorsDAO();
@@ -56,11 +56,50 @@ public class CoursesController extends HttpServlet {
 			out.println(dao.getTotal(query, key));
 			break;
 		case "/cou/update":
-			System.out.println(dao.read(request.getParameter("lcode")).toString());
 			request.setAttribute("lvo", dao.read(request.getParameter("lcode")));
 			request.setAttribute("parray", pdao.allList());
 			request.setAttribute("pageName", "/cou/update.jsp");
 			dis.forward(request, response);
+			break;
+		case "/cou/all.json":
+			ArrayList<CoursesVO> carray = dao.all();
+			
+			JSONArray jArray = new JSONArray();
+			for(CoursesVO vo : carray) {
+				JSONObject obj = new JSONObject();
+				obj.put("lcode", vo.getLcode());
+				obj.put("lname", vo.getLname());
+				obj.put("hours", vo.getHours());
+				obj.put("room", vo.getRoom());
+				obj.put("pname", vo.getPname());
+				obj.put("instructor", vo.getInstructor());
+				obj.put("capacity", vo.getCapacity());
+				obj.put("persons", vo.getPersons());
+				jArray.add(obj);
+			}
+			out.println(jArray);
+			break;
+		case "/cou/grade":
+			String lcode=request.getParameter("lcode");
+			request.setAttribute("cvo", dao.read(lcode));
+			request.setAttribute("pageName", "/cou/grade.jsp");
+			dis.forward(request, response);
+			break;
+		case "/cou/grade.json":
+			lcode = request.getParameter("lcode");
+			ArrayList<GradeVO> array=dao.list(lcode);
+			
+			jArray = new JSONArray();
+			for (GradeVO vo : array) {
+				JSONObject obj = new JSONObject();
+				obj.put("scode", vo.getScode());
+				obj.put("sname", vo.getSname());
+				obj.put("edate", vo.getEdate().substring(0,10));
+				obj.put("grade", vo.getGrade());
+				obj.put("dept", vo.getDept());
+				jArray.add(obj);
+			}
+			out.println(jArray);
 			break;
 		}
 	}
@@ -93,6 +132,13 @@ public class CoursesController extends HttpServlet {
 			dao.update(cvo);
 			response.sendRedirect("/cou/list");
 			break;
+		case "/grade/update":
+			GradeVO gvo = new GradeVO();
+			gvo.setLcode(request.getParameter("lcode"));
+			gvo.setScode(request.getParameter("scode"));
+			gvo.setGrade(Integer.parseInt(request.getParameter("grade")));
+			dao.update(gvo);
+			response.sendRedirect("/cou/grade");
 		}
 	}
 }

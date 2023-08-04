@@ -45,9 +45,12 @@ public class DAOtest {
 //		sdao.insert(svo);
 
 //		System.out.println(cdao.getCode());
-		System.out.println(cdao.read("A109").toString());
+//		System.out.println(cdao.read("A109").toString());
 	
-	
+		for(EnrollVO evo : sdao.list("92414029")) {
+			System.out.println(evo.toString());
+		}
+		
 	}
 	
 }

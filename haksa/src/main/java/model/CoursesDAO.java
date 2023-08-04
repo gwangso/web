@@ -4,6 +4,31 @@ import java.util.*;
 import java.sql.*;
 
 public class CoursesDAO {
+	//전체강좌목록
+	public ArrayList<CoursesVO> all(){
+		ArrayList<CoursesVO> list = new ArrayList<CoursesVO>();
+		try {
+			String 	sql = "select * from view_cou order by lname";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				CoursesVO vo = new CoursesVO();
+				vo.setLcode(rs.getString("lcode"));
+				vo.setLname(rs.getString("lname"));
+				vo.setHours(rs.getInt("hours"));
+				vo.setRoom(rs.getString("room"));
+				vo.setInstructor(rs.getString("instructor"));
+				vo.setPersons(rs.getInt("persons"));
+				vo.setCapacity(rs.getInt("capacity"));
+				vo.setPname(rs.getString("pname"));
+				list.add(vo);
+			}
+		}catch (Exception e) {
+			System.out.println("전체강좌목록 오류 : " + e.toString());
+		}
+		return list;
+	}
+	
 	//강좌목록
 	public ArrayList<CoursesVO> list(int page, String query, String key){
 		ArrayList<CoursesVO> list = new ArrayList<CoursesVO>();
@@ -90,13 +115,14 @@ public class CoursesDAO {
 	public CoursesVO read(String lcode){
 		CoursesVO vo = new CoursesVO();
 		try {
-			String 	sql = "select * from courses where lcode=?";
+			String 	sql = "select * from view_cou where lcode=?";
 			PreparedStatement ps = Database.CON.prepareStatement(sql);
 			ps.setString(1, lcode);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				vo.setLcode(rs.getString("lcode"));
 				vo.setLname(rs.getString("lname"));
+				vo.setPname(rs.getString("pname"));
 				vo.setHours(rs.getInt("hours"));
 				vo.setRoom(rs.getString("room"));
 				vo.setInstructor(rs.getString("instructor"));
@@ -123,6 +149,42 @@ public class CoursesDAO {
 			ps.execute();
 		}catch (Exception e) {
 			System.out.println("강좌등록 오류 : " + e.toString());
+		}
+	}
+	
+	//학생정보 출력
+	public ArrayList<GradeVO> list(String lcode){
+		ArrayList<GradeVO> list = new ArrayList<GradeVO>();
+		try {
+			String sql = "select * from view_enroll_stu where lcode=? order by scode";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setString(1, lcode);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				GradeVO vo = new GradeVO();
+				vo.setScode(rs.getString("scode"));
+				vo.setSname(rs.getString("sname"));
+				vo.setEdate(rs.getString("edate"));
+				vo.setGrade(rs.getInt("grade"));
+				vo.setDept(rs.getString("dept"));
+				list.add(vo);
+			}
+		} catch (Exception e) {
+			System.out.println("성적입력목록 오류 : " +e.toString());
+		}
+		return list;
+	}
+	
+	public void update(GradeVO vo) {
+		try {
+			String sql = "update enrollments set grade=? where lcode=? and scode=?";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setInt(1, vo.getGrade());
+			ps.setString(2, vo.getLcode());
+			ps.setString(3, vo.getScode());
+			ps.execute();
+		}catch (Exception e) {
+			System.out.println("점수등록 오류 : " + e.toString());
 		}
 	}
 }

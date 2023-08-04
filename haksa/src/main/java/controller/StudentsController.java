@@ -18,13 +18,14 @@ import org.json.simple.JSONObject;
 
 import model.*;
 
-@WebServlet(value={"/stu/list", "/stu/list.json", "/stu/total", "/stu/insert", "/stu/update"})
+@WebServlet(value={"/stu/list", "/stu/list.json", "/stu/total", "/stu/insert", "/stu/update", "/stu/enroll", "/stu/enroll.json", "/enroll/insert", "/enroll/delete"})
 public class StudentsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StudentsDAO dao = new StudentsDAO();
+	ProfessorsDAO pdao = new ProfessorsDAO();   
+	CoursesDAO cdao = new CoursesDAO();   
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	DecimalFormat df = new DecimalFormat("#학년");
-    ProfessorsDAO pdao = new ProfessorsDAO();   
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
@@ -70,8 +71,39 @@ public class StudentsController extends HttpServlet {
 			request.setAttribute("pageName", "/stu/update.jsp");
 			dis.forward(request, response);
 			break;
+		case "/stu/enroll":
+			String scode = request.getParameter("scode");
+			request.setAttribute("svo", dao.read(scode));
+			request.setAttribute("carray", cdao.all());
+			request.setAttribute("pageName", "/stu/enroll.jsp");
+			dis.forward(request, response);
+			break;
+		case "/stu/enroll.json":
+			ArrayList<EnrollVO> earray = dao.list(request.getParameter("scode"));
+			
+			jArray = new JSONArray();
+			for (EnrollVO vo : earray) {
+				JSONObject job = new JSONObject();
+				job.put("lcode", vo.getLcode());
+				job.put("scode", vo.getScode());
+				job.put("edate", vo.getEdate());
+				job.put("grade", vo.getGrade());
+				job.put("lname", vo.getLname());
+				job.put("pname", vo.getPname());
+				job.put("hours", vo.getHours());
+				job.put("room", vo.getRoom());
+				job.put("capacity", vo.getCapacity());
+				job.put("persons", vo.getPersons());
+				jArray.add(job);
+			}
+			out.println(jArray);
+			break;
+		case "/enroll/insert":
+			String lcode = request.getParameter("lcode");
+			scode= request.getParameter("scode");
+			out.print(dao.insert(scode,lcode));
+			break;
 		}
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -98,7 +130,11 @@ public class StudentsController extends HttpServlet {
 			dao.update(uvo);
 			response.sendRedirect("/stu/list");
 			break;
+		case "/enroll/delete":
+			String scode = request.getParameter("scode");
+			String lcode = request.getParameter("lcode");
+			dao.delete(scode, lcode);
+			break;
 		}
 	}
-
 }
