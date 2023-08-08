@@ -3,8 +3,13 @@
 
 <div class="row my-3">
 	<div class="col">
-		<h1 class="text-center">**쇼핑몰</h1>
+		<h1 class="text-center">상품목록</h1>
 		<div class="row mb-3">
+			<div class="col">
+				<a href="/goods/insert">
+					<button class="btn btn-primary">상품등록</button>
+				</a>
+			</div>
 			<form name="frm" class="col-10 col-sm-6 col-xl-4">
 				<div class="input-group">
 					<input name=query class="form-control" value="">
@@ -29,7 +34,7 @@
 		</tr>
 		{{#each .}}
 		<tr>
-			<td class="gid">{{gid}}</td>
+			<td class="gid"><a href="/goods/update?gid={{gid}}">{{gid}}</a></td>
 			<td><img class="image" src="{{image}}" width="50px"></td>	
 			<td>{{title}}</td>	
 			<td>{{fmtPrice price}}</td>

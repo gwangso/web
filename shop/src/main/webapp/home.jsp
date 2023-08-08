@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>학사관리</title>
+	<title>**쇼핑몰</title>
 	
 	<!-- j쿼리 -->
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>

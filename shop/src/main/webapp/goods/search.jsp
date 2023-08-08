@@ -50,7 +50,7 @@
 	let page=1;
 	let query=$(frm.query).val();
 	
-	getList();
+	getTotal();
 	
 	function getList(){
 		$.ajax({
@@ -62,7 +62,6 @@
 				const com_temp_search = Handlebars.compile($("#temp_search").html());
 				const html_temp_search = com_temp_search(data);
 				$("#div_search").html(html_temp_search);
-				const totalPgaes=Math.ceil(data.total/5);
 			}
 		});
 	}
@@ -89,10 +88,22 @@
 			alert("검색어를 입려하세요!");
 			$(frm.query).focus();
 		}else {
-			$('#pagination').twbsPagination("changeTotalPages", totalPages,1);
+			getTotal();
 		}
 	});
 	
+	function getTotal(){
+		$.ajax({
+			type:"get",
+			url:"/goods/search.json",
+			data:{page:page, query:query},
+			dataType:"json",
+			success:function(data){
+				const totalPages=Math.ceil(data.total/5);
+				$('#pagination').twbsPagination("changeTotalPages", totalPages,1);
+			}
+		});
+	}
 	
 	$("#div_search").on("click", ".btn-save", function(){
 		const row = $(this).parent().parent();
@@ -111,4 +122,5 @@
 			});
 		}
 	});
+	
 </script>

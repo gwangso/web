@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class GoodsDAO {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
+
 	//상품등록
 	public void insert(GoodsVO vo) {
 		try {
@@ -70,6 +70,42 @@ public class GoodsDAO {
 			ps.execute();
 		} catch (Exception e) {
 			System.out.println("상품 삭제 오류 : " + e.toString());
+		}
+	}
+	
+	public GoodsVO read(String gid) {
+		GoodsVO vo = new GoodsVO();
+		try {
+			String sql = "select * from goods where gid=?";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setString(1, gid);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				vo.setGid(rs.getString("gid"));
+				vo.setTitle(rs.getString("title"));
+				vo.setImage(rs.getString("image"));
+				vo.setMaker(rs.getString("maker"));
+				vo.setPrice(rs.getInt("price"));
+				vo.setRegDate(sdf.format(rs.getTimestamp("regDate")));
+			}
+		}catch (Exception e) {
+			System.out.println("상품 정보 오류 : " + e.toString());
+		}
+		return vo;
+	}
+	
+	public void update(GoodsVO vo) {
+		try {
+			String sql = "UPDATE GOODS SET TITLE=?, PRICE=?, MAKER=? ,IMAGE=? WHERE GID=?";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setString(1, vo.getTitle());
+			ps.setInt(2, vo.getPrice());
+			ps.setString(3, vo.getMaker());
+			ps.setString(4, vo.getImage());
+			ps.setString(5, vo.getGid());
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println("상품수정 오류 : " + e.toString());
 		}
 	}
 }

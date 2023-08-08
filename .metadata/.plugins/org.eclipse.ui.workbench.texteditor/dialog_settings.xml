@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="t, 저장경로, 최대파일사이즈(1"/>
 			<item value="mk"/>
 			<item value="request.getParameter(&quot;page&quot;)"/>
 			<item value="id=&quot;lcode&quot;"/>
@@ -22,7 +23,6 @@
 			<item value="&apos;"/>
 			<item value="Default"/>
 			<item value="prevent"/>
-			<item value="submit"/>
 		</list>
 		<list key="replacehistory">
 			<item value="h5"/>
