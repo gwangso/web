@@ -21,8 +21,8 @@
 
 <script id="temp_search" type="text/x-handlebars-template">
 	<table class="table">
-		<tr class="table-dark">
-			<th>썸네일</tH>
+		<tr class="table-dark">			
+			<th>썸네일</th>
 			<th>상품명</th>
 			<th>상품가격</th>
 			<th>제작자</th>

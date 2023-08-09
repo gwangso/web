@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="row">
 	<div class="col">
@@ -24,8 +25,26 @@
 							<a class="nav-link active" aria-current="page" href="/goods/list" style="color:#FFFFFF;">상품목록</a>
 						</li>
 						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="/user/list" style="color:#FFFFFF;">유저목록</a>
+						</li>
+						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/cart/list" style="color:#FFFFFF;">장바구니</a>
 						</li>
+					</ul>
+					<ul class="navbar-nav mb-2 mb-lg-0">
+						<c:if test="${user==null}">						
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/user/login" style="color:#FFFFFF;">로그인</a>
+							</li>
+						</c:if>
+						<c:if test="${user!=null}">
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/user/read" style="color:#FFFFFF;">${user.uname}님 환영합니다.</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/user/logout" style="color:#FFFFFF;">로그아웃</a>
+							</li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

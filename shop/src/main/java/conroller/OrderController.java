@@ -54,7 +54,6 @@ public class OrderController extends HttpServlet {
 				cvo.setImage(gvo.getImage());
 				cvo.setQnt(1);
 				arrCart.add(cvo);
-				System.out.println(cvo.toString());
 			}
 			session.setAttribute("arrCart", arrCart);
 			break;
