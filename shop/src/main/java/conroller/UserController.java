@@ -27,27 +27,37 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		
 		RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
+		
 		HttpSession session = request.getSession();
+		
 		switch (request.getServletPath()) {
 		case "/user/login":
+			String target = request.getParameter("target")==null?
+					"":request.getParameter("target");
+			session.setAttribute("target", target);
 			request.setAttribute("pageName", "/user/login.jsp");
 			dis.forward(request, response);
 			break;
+		
 		case "/user/logout":
 			session.removeAttribute("user");
 			response.sendRedirect("/");
 			break;
+		
 		case "/user/read":
 			UserVO vo = (UserVO)session.getAttribute("user");
 			request.setAttribute("vo", udao.read(vo.getUid()));
 			request.setAttribute("pageName", "/user/read.jsp");
 			dis.forward(request, response);
 			break;
+		
 		case "/user/insert":
 			request.setAttribute("pageName", "/user/insert.jsp");
 			dis.forward(request, response);
 			break;
+		
 		case "/user/list.json":
 			String key=request.getParameter("key");
 			String query = request.getParameter("query");
@@ -56,6 +66,7 @@ public class UserController extends HttpServlet {
 			Gson gson = new Gson();
 			out.println(gson.toJson(array));
 			break;
+		
 		case "/user/list":
 			request.setAttribute("pageName", "/user/list.jsp");
 			dis.forward(request, response);
@@ -65,13 +76,18 @@ public class UserController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
 		PrintWriter out = response.getWriter();
+		
 		HttpSession session = request.getSession();
+		
 		String path = "/upload/photo/";
 		File mdPath = new File("c:"+path);
 		if(!mdPath.exists()) mdPath.mkdir();
+		
 		switch(request.getServletPath()) {
 		case "/user/login":
+			//로그인
 			String uid = request.getParameter("uid");
 			String upass = request.getParameter("upass");
 			UserVO user = udao.read(uid);
@@ -88,7 +104,7 @@ public class UserController extends HttpServlet {
 			break;
 		case "/user/insert":
 			//폴더생성
-			  
+		
 			MultipartRequest multi = new MultipartRequest
 				(request, "c:"+path, 1024*1024*10, "UTF-8", new DefaultFileRenamePolicy());
 			String photo = multi.getFilesystemName("photo")==null?

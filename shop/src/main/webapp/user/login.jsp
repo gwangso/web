@@ -36,7 +36,12 @@
 					}else if(data==2){
 						alert("비밀번호가 일치하지 않습니다.")
 					}else {
-						location.href="/";
+						const target="${target}";
+						if (target==""){
+							location.href="/";
+						}else{
+							location.href=target;
+						}
 					}
 				}
 			});

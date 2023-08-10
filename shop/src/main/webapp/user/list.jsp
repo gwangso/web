@@ -19,14 +19,12 @@
 			</form>
 		</div>
 		<div id="div_user"></div>
-		<div id="pagination" class="pagination justify-content-center my-3"></div>
 	</div>
 </div>
 
-
 <script id="temp_user" type="text/x-handlebars-template">
 	{{#each .}}
-		<div class="card">
+		<div class="card mb-3">
 			<div class="row">
 				<div class="col-6 col-md-3">
 					<img src="{{photo}}" width="90%">

@@ -28,6 +28,7 @@ public class OrderController extends HttpServlet {
 		HttpSession session = request.getSession();
 		ArrayList<CartVO> arrCart = session.getAttribute("arrCart")==null?
 				new ArrayList<CartVO>() : (ArrayList<CartVO>)session.getAttribute("arrCart");
+		
 		switch(request.getServletPath()) {
 		case "/cart/list":
 			request.setAttribute("pageName", "/order/cart.jsp");
@@ -57,10 +58,12 @@ public class OrderController extends HttpServlet {
 			}
 			session.setAttribute("arrCart", arrCart);
 			break;
+		
 		case "/cart/list.json":
 			Gson gson = new Gson();
 			out.print(gson.toJson(arrCart));
 			break;
+		
 		case "/cart/delete":
 			gid = request.getParameter("gid");
 			
@@ -72,6 +75,7 @@ public class OrderController extends HttpServlet {
 			}
 			session.setAttribute("arrCart", arrCart); //삭제 이후 변한 arrCart를 세션에 다시저장
 			break;
+		
 		case "/cart/update":
 			gid=request.getParameter("gid");
 			int qnt = Integer.parseInt(request.getParameter("qnt"));

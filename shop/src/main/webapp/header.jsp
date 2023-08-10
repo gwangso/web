@@ -28,11 +28,14 @@
 							<a class="nav-link active" aria-current="page" href="/user/list" style="color:#FFFFFF;">유저목록</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/cart/list" style="color:#FFFFFF;">장바구니</a>
+							<a class="nav-link active" aria-current="page" href="/purchase/list" style="color:#FFFFFF;">구매목록</a>
 						</li>
 					</ul>
 					<ul class="navbar-nav mb-2 mb-lg-0">
 						<c:if test="${user==null}">						
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/cart/list" style="color:#FFFFFF;">장바구니</a>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/user/login" style="color:#FFFFFF;">로그인</a>
 							</li>
@@ -40,6 +43,9 @@
 						<c:if test="${user!=null}">
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/user/read" style="color:#FFFFFF;">${user.uname}님 환영합니다.</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/cart/list" style="color:#FFFFFF;">장바구니</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/user/logout" style="color:#FFFFFF;">로그아웃</a>
