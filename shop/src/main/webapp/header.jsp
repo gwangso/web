@@ -18,6 +18,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<c:if test="${user.role==1}">
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/goods/search" style="color:#FFFFFF;">상품검색</a>
 						</li>
@@ -25,11 +26,12 @@
 							<a class="nav-link active" aria-current="page" href="/goods/list" style="color:#FFFFFF;">상품목록</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="/user/list" style="color:#FFFFFF;">유저목록</a>
+							<a class="nav-link active" aria-current="page" href="/user/list" style="color:#FFFFFF;">회원목록</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/purchase/list" style="color:#FFFFFF;">구매목록</a>
 						</li>
+						</c:if>
 					</ul>
 					<ul class="navbar-nav mb-2 mb-lg-0">
 						<c:if test="${user==null}">						

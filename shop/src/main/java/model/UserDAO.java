@@ -6,6 +6,21 @@ import java.util.*;
 public class UserDAO {
 	//회원정보 읽기
 	
+	public int total() {
+		int total=0;
+		try {
+			String sql = "select count(*) from users";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				total=rs.getInt("count(*)");
+			}
+		} catch (Exception e) {
+			System.out.println("구매검색수 오류 : " + e.toString());
+		}
+		return total;
+	}
+	
 	public UserVO read(String uid) {
 		UserVO vo = new UserVO();
 		try {
@@ -22,6 +37,7 @@ public class UserDAO {
 				vo.setAddress2(rs.getString("address2"));
 				vo.setRegDate(rs.getTimestamp("regDate"));
 				vo.setPhoto(rs.getString("photo"));
+				vo.setRole(rs.getInt("role"));
 			}
 		} catch (Exception e) {
 			System.out.println("유저 정보 오류 : " + e.toString());

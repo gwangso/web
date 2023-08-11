@@ -19,7 +19,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import model.*;
 
-@WebServlet(value={"/user/login", "/user/logout", "/user/read", "/user/insert", "/user/update", "/user/list.json", "/user/list"})
+@WebServlet(value={"/user/login", "/user/logout", "/user/read", "/user/insert", "/user/update", "/user/list.json", "/user/list", "/user/total"})
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserDAO udao = new UserDAO();
@@ -70,6 +70,10 @@ public class UserController extends HttpServlet {
 		case "/user/list":
 			request.setAttribute("pageName", "/user/list.jsp");
 			dis.forward(request, response);
+			break;
+			
+		case "/user/total":
+			out.println(udao.total());
 			break;
 		}
 	}

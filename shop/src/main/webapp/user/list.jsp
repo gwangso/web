@@ -19,6 +19,7 @@
 			</form>
 		</div>
 		<div id="div_user"></div>
+		<div id="pagination" class="pagination justify-content-center"></div>
 	</div>
 </div>
 
@@ -44,7 +45,7 @@
 	let query="";
 	let key=$(frm.key).val();
 	
-	getList();
+	getTotal();
 	function getList(){
 		$.ajax({
 			type:"get",
@@ -58,6 +59,22 @@
 		});
 	}
 	
+	function getTotal(){
+		$.ajax({
+			type:"get",
+			url:"/user/total",
+			success:function(data){
+				if(data==0){
+					$("#div_user").html("<h3 class='text-center'>등록한 회원이 없어요ㅠㅠ</h3>")
+				}else {
+					const totalPages = Math.ceil(data/5);
+					$("#pagination").twbsPagination("changeTotalPages", totalPages, 1)
+				}
+			}
+		});
+	}
+	
+	
 	$(frm).on("submit", function(e){
 		e.preventDefault();
 		key=$(frm.key).val();
@@ -65,4 +82,18 @@
 		getList();
 	});
 	
+	$('#pagination').twbsPagination({
+	    totalPages:10,	// 총 페이지 번호 수
+	    visiblePages: 5,	// 하단에서 한번에 보여지는 페이지 번호 수
+	    startPage : 1, // 시작시 표시되는 현재 페이지
+	    initiateStartPageClick: false,	// 플러그인이 시작시 페이지 버튼 클릭 여부 (default : true)
+	    first : '<<',	// 페이지네이션 버튼중 처음으로 돌아가는 버튼에 쓰여 있는 텍스트
+	    prev : '<',	// 이전 페이지 버튼에 쓰여있는 텍스트
+	    next : '>',	// 다음 페이지 버튼에 쓰여있는 텍스트
+	    last : '>>',	// 페이지네이션 버튼중 마지막으로 가는 버튼에 쓰여있는 텍스트
+	    onPageClick: function (event, curPage) { //curPage는 클릭한 페이지의 값이 들어간다.
+	    	page=curPage;
+	    	getList();
+	    }
+	});
 </script>

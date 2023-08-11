@@ -6,7 +6,7 @@
 		<h1 class="my-3 text-center">Login</h1>
 		<form name="frm" class="card p-5">
 			<input name="uid" class="form-control mb-3" placeholder="아이디">
-			<input name="upass" type="password" class="form-control mb-3" placeholder="비밀번호">
+			<input name="upass" type="password" class="form-control mb-3" placeholder="비밀번호" value="pass">
 			<button class="btn btn-primary w-100">로그인</button>
 			<div class="text-end mt-3">
 				<a href="/user/insert">회원가입</a>

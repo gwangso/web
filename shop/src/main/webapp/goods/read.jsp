@@ -24,6 +24,28 @@
 				</div>
 			</div>
 		</div>
+		<div class="my-3">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="detail-tab" data-bs-toggle="tab" data-bs-target="#detail-tab-pane" type="button" role="tab" aria-controls="detail-tab-pane" aria-selected="true">
+						상세설명
+					</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-tab-pane" type="button" role="tab" aria-controls="review-tab-pane" aria-selected="false">
+						고객리뷰
+					</button>
+				</li>
+			</ul>
+			<div class="tab-content my-3" id="myTabContent">
+				<div class="tab-pane fade show active" id="detail-tab-pane" role="tabpanel" aria-labelledby="detail-tab" tabindex="0">
+				 상세설명...
+				</div>
+				<div class="tab-pane fade" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="0">
+					<jsp:include page="/goods/review.jsp"/>
+				</div>
+			</div>			
+		</div>
 	</div>
 </div>
 

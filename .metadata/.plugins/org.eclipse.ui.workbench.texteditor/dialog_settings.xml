@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="mk"/>
+		<item key="selection" value="div_purchase"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="div_purchase"/>
+			<item value="sum"/>
+			<item value="raddress"/>
+			<item value="rphone"/>
 			<item value="t, 저장경로, 최대파일사이즈(1"/>
 			<item value="mk"/>
 			<item value="request.getParameter(&quot;page&quot;)"/>
@@ -19,10 +23,6 @@
 			<item value="parray"/>
 			<item value="update"/>
 			<item value="insert"/>
-			<item value="div_cou_list"/>
-			<item value="&apos;"/>
-			<item value="Default"/>
-			<item value="prevent"/>
 		</list>
 		<list key="replacehistory">
 			<item value="h5"/>

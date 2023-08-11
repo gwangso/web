@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import model.*;
 
 
-@WebServlet(value={"/purchase/insert", "/order/insert", "/purchase/list", "/purchase/list.json"})
+@WebServlet(value={"/purchase/insert", "/order/insert", "/purchase/list", "/purchase/list.json", "/purchase/total", "/purchase/read", "/purchase/update"})
 public class PurchaseController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     PurchaseDAO pdao = new PurchaseDAO();   
@@ -26,7 +26,7 @@ public class PurchaseController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		RequestDispatcher dis = request.getRequestDispatcher("/home.jsp");
 		switch (request.getServletPath()) {
-		case "/purchase/list.json":
+		case "/purchase/list.json": ///purchase/list.json?key=uname&query=&page=1
 			String key = request.getParameter("key");
 			String query = request.getParameter("query");
 			int page = Integer.parseInt(request.getParameter("page"));
@@ -35,6 +35,18 @@ public class PurchaseController extends HttpServlet {
 			break;
 		case "/purchase/list":
 			request.setAttribute("pageName", "/purchase/list.jsp");
+			dis.forward(request, response);
+			break;
+		case "/purchase/total": // /purchase/total?key=pid&query=
+			key = request.getParameter("key");
+			query = request.getParameter("query");
+			out.print(pdao.total(key, query));
+			break;
+		case "/purchase/read":
+			String pid = request.getParameter("pid");
+			request.setAttribute("vo", pdao.read(pid));
+			request.setAttribute("pageName", "/purchase/read.jsp");
+			request.setAttribute("array", pdao.list(pid));
 			dis.forward(request, response);
 			break;
 		}
@@ -69,6 +81,11 @@ public class PurchaseController extends HttpServlet {
 			ovo.setQnt(Integer.parseInt(request.getParameter("qnt")));
 			System.out.println(ovo.toString());
 			pdao.insert(ovo);
+			break;
+		case "/purchase/update":
+			pid=request.getParameter("pid");
+			int status=Integer.parseInt(request.getParameter("status"));
+			pdao.update(pid, status);
 			break;
 		}
 	}
