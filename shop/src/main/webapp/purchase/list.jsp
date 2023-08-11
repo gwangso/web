@@ -61,7 +61,7 @@
 						<option value="2" {{select status 2}}>상품준비중</option>
 						<option value="3" {{select status 3}}>배송준비중</option>
 						<option value="4" {{select status 4}}>배송중</option>		
-						<option value="5" {{select status 5}}>배성완료</option>		
+						<option value="5" {{select status 5}}>배송완료</option>		
 						<option value="6" {{select status 6}}>구매확정</option>		
 					</select>
 				</td>
