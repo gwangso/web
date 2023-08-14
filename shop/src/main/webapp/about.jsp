@@ -28,9 +28,17 @@
 	{{#each .}}
 		<div class="col-6 col-md-4 col-xl-2 mb-3">
 			<div class="card p-3">
-				<img src="{{image}}" gid="{{gid}}" style="cursor: pointer;">
-				<div class="ellipsis title">{{title}}</div>
-				<div class="price">{{fmtPrice price}}</div>
+				<div class="card-body">
+					<img src="{{image}}" gid="{{gid}}" width=100% style="cursor: pointer;">
+					<div class="ellipsis title">{{title}}</div>
+					<div class="price">{{fmtPrice price}}</div>
+				</div>
+				<div class="card-footer">
+					<i class="bi {{heart ucnt}}" style="color:red;"></i>
+					<span style="font-size:0.8rem;">{{fcnt}}</span> &nbsp;&nbsp;
+					<i class="bi bi-chat-left-text"></i>
+					<span style="font-size:0.8rem;">{{rcnt}}</span>
+				</div>
 			</div>
 		</div>
 	{{/each}}
@@ -40,11 +48,17 @@
 	Handlebars.registerHelper("fmtPrice", function(price){
 		return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 	});
+	
+	Handlebars.registerHelper("heart", function(ucnt){
+		if(ucnt==0) return "bi-suit-heart";
+		else return "bi-suit-heart-fill";
+	});
 </script>
 
 <script>
 	let page=1;
 	let query="";
+	const uid="${user.uid}";
 	
 	getTotal();
 	
@@ -52,12 +66,12 @@
 		$.ajax({
 			type:"get",
 			url:"/goods/list.json",
-			data:{page:page, query:query},
+			data:{page:page, query:query, uid:uid},
 			dataType:"json",
 			success:function(data){
-				console.log(data);
 				const temp = Handlebars.compile($("#temp_goods").html());
 				$("#div_goods").html(temp(data));
+				
 			}
 		});
 	}
@@ -110,4 +124,6 @@
 		const gid = $(this).attr("gid");
 		location.href="/goods/read?gid="+gid;
 	})
+	
+	
 </script>

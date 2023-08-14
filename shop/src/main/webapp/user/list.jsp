@@ -74,7 +74,6 @@
 		});
 	}
 	
-	
 	$(frm).on("submit", function(e){
 		e.preventDefault();
 		key=$(frm.key).val();

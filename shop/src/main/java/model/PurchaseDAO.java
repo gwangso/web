@@ -67,6 +67,33 @@ public class PurchaseDAO {
 		return array;
 	}
 	
+	//주문목록(사용자용)
+	public ArrayList<PurchaseVO> user(String uid){
+		ArrayList<PurchaseVO> array = new ArrayList<PurchaseVO>();
+		try {
+			String sql = "select * from purchase where uid=? order by purdate";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setString(1, uid);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				PurchaseVO vo = new PurchaseVO();
+				vo.setPid(rs.getString("pid"));
+				vo.setUid(rs.getString("uid"));
+				vo.setAddress1(rs.getString("raddress1"));
+				vo.setAddress2(rs.getString("raddress2"));
+				vo.setPhone(rs.getString("rphone"));
+				vo.setPurSum(rs.getInt("pursum"));
+				vo.setPurDate(sdf.format(rs.getTimestamp("purdate")));
+				vo.setStatus(rs.getInt("status"));
+				array.add(vo);
+			}
+		} catch (Exception e) {
+			System.out.println("주문목록 오류 : " + e.toString());
+		}
+		return array;
+	}
+	
+	
 	public int total(String key, String query) {
 		int total=0;
 		try {

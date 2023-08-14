@@ -1,11 +1,17 @@
 package model;
 
+import java.util.UUID;
+
 public class DAOtest {
 
 	public static void main(String[] args) {
-		UserDAO udao = new UserDAO();
+		GoodsDAO dao = new GoodsDAO();
 		
-		System.out.println(udao.total());
+		UUID uid = UUID.randomUUID();
+		System.out.println(uid);
+		uid = UUID.randomUUID();
+		System.out.println(uid);
+
 	}
 
 }

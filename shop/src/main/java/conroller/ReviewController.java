@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import model.*;
 
-@WebServlet(value={"/review/insert", "/review/list.json"})
+@WebServlet(value={"/review/insert", "/review/list.json", "/review/delete", "/review/update"})
 public class ReviewController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     ReviewDAO rdao = new ReviewDAO();
@@ -39,6 +39,15 @@ public class ReviewController extends HttpServlet {
 			vo.setUid(request.getParameter("uid"));
 			vo.setContent(request.getParameter("content"));
 			rdao.insert(vo);
+			break;
+		case "/review/delete":
+			int rid = Integer.parseInt(request.getParameter("rid"));
+			rdao.delete(rid);
+			break;
+		case "/review/update":
+			rid = Integer.parseInt(request.getParameter("rid"));
+			String content = request.getParameter("content");
+			rdao.update(rid, content);
 			break;
 		}
 	}

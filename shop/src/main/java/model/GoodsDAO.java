@@ -24,13 +24,16 @@ public class GoodsDAO {
 		}
 	}
 	
-	public ArrayList<GoodsVO> list (int page, String query){
+	public ArrayList<GoodsVO> list (int page, String query, String uid){
 		ArrayList<GoodsVO> list = new ArrayList<GoodsVO>();
 		try {
-			String sql = "select * from goods where title like ? order by regDate desc limit ?,6";
+			String sql = "select *,";
+					sql += "(select count(*) from favorite where g.gid=gid and uid=?) ucnt";
+					sql += " from view_goods g where title like ? limit ?,6";
 			PreparedStatement ps = Database.CON.prepareStatement(sql);
-			ps.setString(1, "%" + query + "%");
-			ps.setInt(2, (page-1)*6);
+			ps.setString(1, uid);
+			ps.setString(2, "%" + query + "%");
+			ps.setInt(3, (page-1)*6);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				GoodsVO vo = new GoodsVO();
@@ -40,6 +43,9 @@ public class GoodsDAO {
 				vo.setMaker(rs.getString("maker"));
 				vo.setPrice(rs.getInt("price"));
 				vo.setRegDate(sdf.format(rs.getTimestamp("regDate")));
+				vo.setFcnt(rs.getInt("fcnt"));
+				vo.setRcnt(rs.getInt("rcnt"));
+				vo.setUcnt(rs.getInt("ucnt"));
 				list.add(vo);
 			}
 		}catch (Exception e) {

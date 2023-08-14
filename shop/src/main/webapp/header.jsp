@@ -18,7 +18,7 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-						<c:if test="${user.role==1}">
+						<c:if test="${user.role==1}"> <!-- 유저가 관리자(1)일경우 -->
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="/goods/search" style="color:#FFFFFF;">상품검색</a>
 						</li>
@@ -34,7 +34,7 @@
 						</c:if>
 					</ul>
 					<ul class="navbar-nav mb-2 mb-lg-0">
-						<c:if test="${user==null}">						
+						<c:if test="${user==null}">	<!-- 비로그인상태 -->
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/cart/list" style="color:#FFFFFF;">장바구니</a>
 							</li>
@@ -42,12 +42,15 @@
 								<a class="nav-link active" aria-current="page" href="/user/login" style="color:#FFFFFF;">로그인</a>
 							</li>
 						</c:if>
-						<c:if test="${user!=null}">
+						<c:if test="${user!=null}"> <!-- 로그인상태 -->
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/user/read" style="color:#FFFFFF;">${user.uname}님 환영합니다.</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/cart/list" style="color:#FFFFFF;">장바구니</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link active" aria-current="page" href="/purchase/user" style="color:#FFFFFF;">주문목록</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link active" aria-current="page" href="/user/logout" style="color:#FFFFFF;">로그아웃</a>

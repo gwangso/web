@@ -1,6 +1,7 @@
 package conroller;
 
 import java.io.File;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,8 +49,9 @@ public class GoodsController extends HttpServlet {
 		case "/goods/list.json": // /goods/list.json?page=1&query=
 			page = Integer.parseInt(request.getParameter("page"));
 			query = request.getParameter("query");
+			String uid =request.getParameter("uid");
 			Gson gson = new Gson();
-			out.println(gson.toJson(gdao.list(page, query)));
+			out.println(gson.toJson(gdao.list(page, query, uid)));
 			break;
 		case "/goods/total":
 			query=request.getParameter("query");

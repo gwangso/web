@@ -21,6 +21,7 @@ public class ReviewDAO {
 		}
 	}
 	
+	//리뷰 리스트
 	public ArrayList<ReviewVO> list(String gid){
 		ArrayList<ReviewVO> list = new ArrayList<ReviewVO>();
 		try {
@@ -43,5 +44,30 @@ public class ReviewDAO {
 			System.out.println("리뷰목록 오류 : " + e.toString());
 		}
 		return list;
+	}
+	
+	//리뷰 삭제
+	public void delete(int rid) {
+		try {
+			String sql="delete from reviews where rid=?";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setInt(1, rid);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println("리뷰 삭제 오류 : " + e.toString());
+		}
+	}
+	
+	//리뷰 수정
+	public void update(int rid, String content) {
+		try {
+			String sql="update reviews set content=? where rid=?";
+			PreparedStatement ps = Database.CON.prepareStatement(sql);
+			ps.setString(1, content);
+			ps.setInt(2, rid);
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println("리뷰 삭제 오류 : " + e.toString());
+		}
 	}
 }
